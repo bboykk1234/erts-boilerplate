@@ -1,22 +1,25 @@
 {
     "compilerOptions": {
         "jsx": "react",
-        "target": "es5",
+        "target": "es6",
         "module": "commonjs",
         "noImplicitAny": false,
         "removeComments": true,
         "preserveConstEnums": true,
         "sourceMap": true,
         "baseUrl": "./",
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
         "paths": {
             "Components/*": ["sources/components/*"],
+            "Database": ["sources/database.ts"],
+            "Models": ["sources/models/*"],
         }
     },
     "include": [
         "sources/**/*"
     ],
     "exclude": [
-        "node_modules",
-        "**/*.spec.ts"
+        "node_modules"
     ]
 }

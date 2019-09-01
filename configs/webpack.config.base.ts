@@ -24,14 +24,17 @@ const node : webpack.Node = {
 }
 
 const resolve : webpack.Resolve = {
-    extensions: ['.ts', '.tsx', '.d.ts', '.js', '.jsx', '.scss', '.json'],
+    extensions: ['.ts', '.tsx', '.js', '.jsx', '.scss', '.json'],
     alias: {
         Components: path.resolve(__dirname, '../sources/components/'),
+        Database: path.resolve(__dirname, '../sources/database'),
+        Models: path.resolve(__dirname, '../sources/models/'),
     }
 };
 
 const externals =  {
     sqlite3: 'commonjs sqlite3',
+    sequelize: "commonjs sequelize",
     pg: true,
     'pg-hstore': true,
     tedious: true,
