@@ -1,7 +1,8 @@
 import * as path from "path";
 import * as webpack from "webpack";
+import { env } from "../sources/helper";
 
-const mode = process.env.NODE_ENV as "development" | "production" | "none";
+const mode = env;
 
 const output : webpack.Output = {
     path: path.resolve(__dirname, "../app"),
@@ -18,8 +19,8 @@ const moduleConfig : webpack.Module = {
 };
 
 const node : webpack.Node = {
-    __dirname: false,
-    __filename: false,
+    __dirname: true, // previously was false
+    __filename: true, // previously was false
     fs: "empty",
 }
 

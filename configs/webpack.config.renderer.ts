@@ -8,6 +8,7 @@ import * as webpack from "webpack";
 import * as WebpackDevServer from "webpack-dev-server";
 
 import baseConfig from "./webpack.config.base";
+import { isDev, appPath } from "../sources/helper";
 
 const entry : webpack.Entry = {
     renderer: path.resolve(__dirname, '../sources/index.tsx')
@@ -21,20 +22,15 @@ const moduleConfig : webpack.Module = {
                 {
                     loader: MiniCssExtractPlugin.loader,
                     options: {
-                        hmr: true,
+                        hmr: isDev,
                         reloadAll: true,
                     }
                 },
                 {
-                    loader: 'typings-for-css-modules-loader',
+                    loader: 'css-loader',
                     options: {
-                        modules: true,
                         sourceMap: true,
-                        importLoaders: 2,
-                        localIdentName: '[local]',
-                        sass:true,
-                        namedExport: true,
-                        camelCase: true,
+                        importLoaders: 1,
                     }
                 },
                 'sass-loader',
@@ -46,7 +42,7 @@ const moduleConfig : webpack.Module = {
             options: {
                 name: "[name].[ext]",
                 outputPath: "assets/fonts/",
-                publicPath: "http://127.0.0.1:8888" + "/fonts/"
+                publicPath: appPath + "/fonts/"
             }
         },
         {
@@ -55,7 +51,7 @@ const moduleConfig : webpack.Module = {
             options: {
                 name: "[name].[ext]",
                 outputPath: "assets/images/",
-                publicPath: "http://127.0.0.1:8888" + "/images/"
+                publicPath: appPath + "/images/"
             }
         }
     ]
@@ -64,7 +60,7 @@ const moduleConfig : webpack.Module = {
 const target = 'electron-renderer' as 'electron-renderer';
 
 const output : webpack.Output = {
-    publicPath : "http://127.0.0.1:8888"
+    publicPath : appPath
 };
 
 let plugins : webpack.Plugin[] = [
@@ -87,7 +83,7 @@ let plugins : webpack.Plugin[] = [
       }),
 ];
 
-if (true) {
+if (isDev) {
     plugins = [
         ...plugins,
         new webpack.HotModuleReplacementPlugin(),
@@ -95,7 +91,7 @@ if (true) {
 }
 
 const devServer : WebpackDevServer.Configuration = {
-    publicPath  : "http://127.0.0.1:8888",
+    publicPath  : appPath,
     contentBase : path.resolve(__dirname, "app"),
     compress    : true,
     port        : 8888,
@@ -122,7 +118,7 @@ let config : webpack.Configuration = merge.smart(
     }
 )
 
-if (true) {
+if (isDev) {
     config = {
         ...config,
         devServer,
