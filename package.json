@@ -10,7 +10,7 @@
     "server": "webpack-dev-server --color --config ./configs/webpack.config.renderer.ts",
     "build": "npm run build:renderer && npm run build:main",
     "style:dev": "tsm -w ./sources/index.scss",
-    "start": "npm run build:prod && npm run electron",
+    "start": "npm run build && npm run electron",
     "start:dev": "npm run build:main && concurrently -k \"npm run server\" \"npm run electron\"",
     "electron": "electron ./app"
   },
@@ -71,10 +71,8 @@
     "bootstrap": "^4.3.1",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
-    "react-redux": "^7.1.1",
     "react-router-dom": "^5.0.1",
     "reactstrap": "^8.0.1",
-    "redux": "^4.0.4",
     "sequelize": "^5.18.0",
     "sqlite3": "^4.1.0"
   }

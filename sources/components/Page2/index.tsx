@@ -1,11 +1,11 @@
 import * as React from "react";
+import { UserContext, UserProps } from "../../contexts/User";
 
-export default class Page2 extends React.Component
-{
-    public render()
-    {
-        return (
-            <div><p>Hello from page 2</p></div>
-        );
-    }
-}
+export default function Page2() {
+    const {name} = React.useContext(UserContext) as UserProps;
+    console.log(name);
+
+    return (
+        <div>Hello {name} gg</div>
+    )
+};

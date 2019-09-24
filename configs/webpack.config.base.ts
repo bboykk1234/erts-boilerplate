@@ -36,9 +36,10 @@ const resolve : webpack.Resolve = {
 const externals =  {
     sqlite3: 'commonjs sqlite3',
     sequelize: "commonjs sequelize",
-    pg: true,
-    'pg-hstore': true,
-    tedious: true,
+    "sequelize-typescript": "commonjs sequelize-typescript",
+    // pg: true,
+    // 'pg-hstore': true,
+    // tedious: true,
 }
 
 
