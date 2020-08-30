@@ -7,6 +7,7 @@ const mode = env;
 const output : webpack.Output = {
     path: path.resolve(__dirname, "../app"),
     filename: "[name].js",
+    libraryTarget: 'commonjs2',
 };
 
 const moduleConfig : webpack.Module = {
@@ -38,7 +39,7 @@ const externals =  {
     sequelize: "commonjs sequelize",
     "sequelize-typescript": "commonjs sequelize-typescript",
     // pg: true,
-    // 'pg-hstore': true,
+    'pg-hstore': 'commonjs pg-hstore',
     // tedious: true,
 }
 

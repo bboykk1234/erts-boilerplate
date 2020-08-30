@@ -1,5 +1,5 @@
 import * as electron from "electron";
-import { isDev, appPath } from "../sources/helper";
+import { isDev, appPath } from "../helper";
 import installExtension, {
   REACT_DEVELOPER_TOOLS,
   REDUX_DEVTOOLS

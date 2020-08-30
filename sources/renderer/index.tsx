@@ -1,9 +1,8 @@
-import "./index.scss";
-import "sqlite3";
+import "../index.scss";
 
 import * as React from "react";
 import { render } from "react-dom";
-import App from "Components/App";
+import App from "./components/App";
 
 render(
     <App />,

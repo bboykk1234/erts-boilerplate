@@ -11,7 +11,7 @@ import baseConfig from "./webpack.config.base";
 import { isDev, appPath } from "../sources/helper";
 
 const entry : webpack.Entry = {
-    renderer: path.resolve(__dirname, '../sources/index.tsx')
+    renderer: path.resolve(__dirname, '../sources/renderer/index.tsx')
 };
 
 const moduleConfig : webpack.Module = {

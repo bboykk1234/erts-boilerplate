@@ -11,9 +11,9 @@
         "experimentalDecorators": true,
         "emitDecoratorMetadata": true,
         "paths": {
-            "Components/*": ["sources/components/*"],
-            "Database": ["sources/database.ts"],
-            "Models": ["sources/models/*"],
+            "Components/*": ["sources/renderer/components/*"],
+            "Database": ["sources/main/database.ts"],
+            "Models": ["sources/main/models/*"],
         }
     },
     "include": [

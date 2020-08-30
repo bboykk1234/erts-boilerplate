@@ -1,5 +1,5 @@
 import * as React from "react";
-import { User } from "../../models/User";
+import { remote } from "electron";
 
 export default class Page1 extends React.Component<{}, {email: string}>
 {
@@ -8,13 +8,14 @@ export default class Page1 extends React.Component<{}, {email: string}>
     constructor(props)
     {
         super(props);
+        this.user = remote.require('./database.js').User;
         this.state = {
             email: 'test123',
         };
     }
 
     async setUserEmail() {
-        const user = await User.findOne();
+        const user = await this.user.findOne();
 
         this.setState({email: user.email});
     }
