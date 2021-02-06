@@ -3,12 +3,16 @@ services:
   app:
     build: 
       context: ./
+    environment: 
+      - DISPLAY=host.docker.internal:0
     volumes:
       - .:/app
+      - /tmp/.X11-unix:/tmp/.X11-unix
     ports:
       - "8000:8000"
     networks:
       - app-network
+    command: yarn run start:dev
 
 networks:
   app-network:

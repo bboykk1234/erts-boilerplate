@@ -10,7 +10,7 @@ export const isTest : boolean = process.env.NODE_ENV === 'test';
 
 export const isDebugMode : boolean = process.env.DEBUG_MODE as unknown as boolean;
 
-export const port = process.env.PORT;
+export const port = Number(process.env.PORT);
 export const url = process.env.URL;
 export const env = process.env.NODE_ENV as "development" | "production";
 

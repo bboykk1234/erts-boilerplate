@@ -1,5 +1,4 @@
 import "./index.scss";
-import "sqlite3";
 
 import * as React from "react";
 import { render } from "react-dom";

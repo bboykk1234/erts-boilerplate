@@ -10,3 +10,18 @@ TODO
 - move sqlite3 to main process
 - create db file when db file not found when loaded
 - restructure main process scripts put electron package.json in app folder, so that sqlite3 package will be isolated from renderer scripts
+
+2021-02-06
+Before getting started:
+Make sure your machine has XQuartz
+
+Need to run
+ip=$(ifconfig en0 | grep inet | awk '$1=="inet" {print $2}')
+xhost + $ip
+
+Then can run 
+docker-compose up
+
+References:
+- https://github.com/juanda/electron-docker
+- https://fredrikaverpil.github.io/2016/07/31/docker-for-mac-and-gui-applications/

@@ -1,30 +1,26 @@
 import { CleanWebpackPlugin }  from "clean-webpack-plugin";
-import * as CopyWebpackPlugin from "copy-webpack-plugin";
 import * as MiniCssExtractPlugin from "mini-css-extract-plugin";
 import * as HtmlWebpackPlugin from "html-webpack-plugin";
-import * as merge from "webpack-merge";
+import { merge } from "webpack-merge";
 import * as path from "path";
 import * as webpack from "webpack";
 import * as WebpackDevServer from "webpack-dev-server";
 
 import baseConfig from "./webpack.config.base";
-import { isDev, appPath } from "../sources/helper";
+import { isDev, appPath, port } from "../sources/helper";
 
 const entry : webpack.Entry = {
     renderer: path.resolve(__dirname, '../sources/index.tsx')
 };
 
-const moduleConfig : webpack.Module = {
+const moduleConfig = {
     rules: [
         {
             test    : /\.s(c|a)ss$/,
             use: [
                 {
                     loader: MiniCssExtractPlugin.loader,
-                    options: {
-                        hmr: isDev,
-                        reloadAll: true,
-                    }
+                    options: {}
                 },
                 {
                     loader: 'css-loader',
@@ -59,18 +55,14 @@ const moduleConfig : webpack.Module = {
 
 const target = 'electron-renderer' as 'electron-renderer';
 
-const output : webpack.Output = {
+const output = {
     publicPath : appPath
 };
 
-let plugins : webpack.Plugin[] = [
+let plugins : webpack.WebpackPluginInstance[] = [
     new CleanWebpackPlugin({
         cleanOnceBeforeBuildPatterns: ['**/*', '!package.json', '!index.js'],
     }),
-    new CopyWebpackPlugin([
-        // { from: "bootstrap/core/*", flatten: true}
-        { from: "sources/index.html", flatten: true},
-    ]),
     new HtmlWebpackPlugin({
         filename : "index.html",
         template : "sources/index.html",
@@ -83,18 +75,11 @@ let plugins : webpack.Plugin[] = [
       }),
 ];
 
-if (isDev) {
-    plugins = [
-        ...plugins,
-        new webpack.HotModuleReplacementPlugin(),
-    ]
-}
-
-const devServer : WebpackDevServer.Configuration = {
+const devServer: WebpackDevServer.Configuration = {
     publicPath  : appPath,
-    contentBase : path.resolve(__dirname, "app"),
+    contentBase : path.resolve(__dirname, "../app"),
     compress    : true,
-    port        : 8888,
+    port        : port ?? 8000,
     hot         : true,
     hotOnly     : false,
     stats       : "errors-only",
@@ -107,7 +92,7 @@ const devServer : WebpackDevServer.Configuration = {
 };
 
 
-let config : webpack.Configuration = merge.smart(
+let config : webpack.Configuration = merge(
     baseConfig,
     {
         entry,
