@@ -18,6 +18,7 @@ Make sure your machine has XQuartz
 Need to run
 ip=$(ifconfig en0 | grep inet | awk '$1=="inet" {print $2}')
 xhost + $ip
+sudo xhost +
 
 Then can run 
 docker-compose up

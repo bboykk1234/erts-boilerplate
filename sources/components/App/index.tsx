@@ -30,7 +30,7 @@ export default class App extends React.Component {
       //   </AppProvider>
       // </Router>
       <div>
-        <p>Hello world</p>
+        <p>Hello world!</p>
       </div>
     );
   }
