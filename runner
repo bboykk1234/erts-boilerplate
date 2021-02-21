@@ -1,0 +1,47 @@
+#!/usr/bin/env bash
+
+export IP=$(ifconfig en0 | grep inet | awk '$1=="inet" {print $2}')
+
+if ! command -v xhost &> /dev/null
+then
+    echo "xhost could not be found"
+    exit
+fi
+
+PSRESULT="$(docker-compose ps -q)"
+
+if docker-compose ps | grep 'Exit'; then
+    echo -e "${WHITE}Shutting down old processes...${NC}" >&2
+
+    docker-compose down > /dev/null 2>&1
+
+    EXEC="no"
+elif [ -n "$PSRESULT" ]; then
+    EXEC="yes"
+else
+    EXEC="no"
+fi
+
+if [ $# -gt 0 ]; then
+    if [ "$1" == "yarn" ]; then
+        shift 1
+
+        if [ "$EXEC" == "yes" ]; then
+            docker-compose run --rm \
+                app \
+                yarn "$@"
+        else
+            echo "Container is not running"
+        fi
+    elif [ "$1" == "start" ]; then
+        # sudo xhost +
+        xhost + $IP
+        docker-compose up -d
+    elif [ "$1" == "stop" ]; then
+        docker-compose down
+    elif [ "$1" == "install" ]; then
+        docker-compose run --rm \
+            app \
+            yarn install
+    fi
+fi
