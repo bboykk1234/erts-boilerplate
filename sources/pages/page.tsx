@@ -1,7 +1,7 @@
 import * as React from "react";
-import { UserContext, UserProps } from "../../contexts/User";
+import { UserContext, UserProps } from "../contexts/User";
 
-export default function Page2() {
+const Page = () => {
     const {name} = React.useContext(UserContext) as UserProps;
     console.log(name);
 
@@ -9,3 +9,5 @@ export default function Page2() {
         <div>Hello {name} gg</div>
     )
 };
+
+export default Page;

@@ -3,8 +3,11 @@ services:
   app:
     build: 
       context: ./
+      args: 
+        USER: '${USER}'
+        GROUP: '${GROUP}'
     environment: 
-      - DISPLAY=${IP}:0.0
+      DISPLAY: '${IP}:0.0'
     volumes:
       - .:/app
       - /tmp/.X11-unix:/tmp/.X11-unix

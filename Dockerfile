@@ -1,11 +1,7 @@
 FROM node:14
 
-RUN mkdir -p /app
-WORKDIR /app
-
-RUN groupadd -g 2000 appgroup \
-    && useradd -m -u 2001 -g appgroup app
-RUN chown -R app:appgroup /app
+ARG USER
+ARG GROUP   
 
 RUN apt-get update && \
     apt-get -y install libgconf2-dev \
@@ -17,6 +13,12 @@ RUN apt-get update && \
     libgtk-3.0 \
     libx11-xcb1 && \    
     apt-get clean
+
+RUN mkdir -p /app
+WORKDIR /app
+
+RUN useradd -m -u $USER -g $GROUP app
+RUN chown -R $USER:$GROUP /app
 
 RUN npm install --quiet node-gyp npm-check-updates -g
 
