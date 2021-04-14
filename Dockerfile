@@ -17,8 +17,9 @@ RUN apt-get update && \
 RUN mkdir -p /app
 WORKDIR /app
 
-RUN useradd -m -u $USER -g $GROUP app
-RUN chown -R $USER:$GROUP /app
+RUN groupadd -g $GROUP app \
+    && useradd -m -u $USER -g app app
+RUN chown -R app:app /app
 
 RUN npm install --quiet node-gyp npm-check-updates -g
 
